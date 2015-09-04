@@ -1,0 +1,787 @@
+@grey: #AAAABA;
+@light-grey: #EEEEF0;
+@really-light-grey: #F6F6FF;
+@blue: #4125E8;
+@blue-pastel: #6073E8;
+
+@column-width: 620px;
+
+html,
+body {
+	height: 100%;
+	font-family: 'Open Sans', Arial, sans-serif !important;
+	font-size: 14px;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: @blue;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.title-bar {
+	height: 34px;
+	width: 100%;
+	margin: 0;
+	padding: 2px;
+	background-color: @really-light-grey;
+
+	.title-inner {
+		width: 100%;
+		max-width: @column-width;
+		height: 100%;
+		margin: auto;
+
+		h1 {
+			margin: 0;
+			height: 30px;
+			line-height: 30px;
+			font-size: 20px;
+			display: block;
+			float: left;
+
+			.title {
+				color: #333333;
+			}
+
+			.version {
+				margin-left: 10px;
+				color: @blue;
+			}
+		}
+
+		#btnMute {
+			float: right;
+			width: 26px;
+			height: 26px;
+			margin-top: 2px;
+			margin-right: 10px;
+			background-image: url(/images/volume-on.svg);
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-position: center;
+
+			&.muted {
+				background-image: url(/images/volume-mute.svg);
+			}
+		}
+
+		#chkDisableScroll {
+			float: right;
+			height: 30px;
+			margin: 0;
+			margin-right: 10px;
+		}
+
+		#btnLogout,
+		#btnClearColours {
+			float: right;
+			width: 100px;
+			height: 30px;
+		}
+
+		#btnClearColours {
+			margin-right: 10px;
+		}
+	}
+}
+
+.wrap {
+	width: 98%;
+	max-width: @column-width;
+	margin: auto;
+	height: calc(~"100% - 45px");
+	padding-top: 5px;
+	/*background-image: url(http://static.squarespace.com/static/51d44341e4b085686833bb66/t/52a65245e4b0627b74064bdf/1386631780129/blog_WilleeCole_61564285.jpg);*/
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.auth-wrap {
+	width: 240px;
+	padding: 10px;
+	border: 1px solid @light-grey;
+	border-radius: 4px;
+	position: fixed;
+	left: 50%;
+	top: 25%;
+	margin-left: -120px;
+
+	input {
+		display: block;
+		padding: 5px;
+		width: 200px;
+		border: 1px solid @light-grey;
+		border-radius: 2px;
+		margin-bottom: 5px;
+	}
+
+	button {
+		padding: 5px;
+		width: 100px;
+	}
+}
+
+.messenger-tabs {
+	float: left;
+	width: 92%;
+	height: calc(~"100% - 26px");
+}
+
+.messenger {
+	position: relative;
+	display: none;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	background-color: rgba(255,255,255,0.9);
+
+	&.drag-hover {
+		background-color: rgba(255,200,200,0.9);
+	}
+
+	.message-list {
+		width: 100%;
+		height: calc(~"100% - 31px");
+		padding: 0;
+		margin: 0;
+		border: 1px solid @light-grey;
+		list-style: none;
+		overflow: auto;
+
+		li {
+			padding: 2px;
+			text-overflow: ellipsis;
+			display: block;
+			max-width: 100%;
+			white-space: normal;
+			overflow: hidden;
+
+			&.self {
+				background-color: @really-light-grey;
+				text-align: right;
+
+				span.message {
+					background-color: transparent;
+					padding-right: 0;
+				}
+			}
+
+			&.server {
+				background-color: @blue-pastel;
+				color: #FFFFFF;
+				font-size: 12px;
+				padding: 4px 5px;
+
+				span.message {
+					background-color: transparent;
+				}
+			}
+
+			.hashtag {
+				color: #2222AA;
+			}
+
+			&.typing {
+				color: @grey;
+				font-size: 12px;
+			}
+
+			&.seen {
+				color: @grey;
+				font-size: 11px;
+				padding: 2px;
+				text-align: right;
+			}
+
+			img {
+				max-width: 220px;
+			}
+
+			span.message {
+				display: inline-block;
+				border-radius: 4px;
+				background-color: @really-light-grey;
+				padding: 2px 4px;
+			}
+		}
+	}
+
+	#userList {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 8%;
+		padding: 0;
+		margin: 0;
+		border: 1px solid @light-grey;
+		border-left: none;
+		list-style: none;
+		margin-top: 31px;
+		background-color: #FFFFFF;
+		transition: width linear 0.1s;
+
+		&.open {
+			width: 45%;
+		}
+
+		li {
+			padding: 10px;
+			border-left: 1px solid @light-grey;
+			overflow: hidden;
+			white-space: nowrap;
+
+			&:hover {
+				background-color: @really-light-grey;
+				cursor: pointer;
+			}
+
+			&.state-available {
+				.state-icon {
+					background-color: #66FF66;
+				}
+			}
+
+			&.state-away {
+				.state-icon {
+					background-color: #E23853;
+				}
+			}
+
+			&.state-busy {
+				.state-icon {
+					background-color: red;
+				}
+			}
+
+			.state-icon {
+				width: 6px;
+				height: 6px;
+				display: inline-block;
+				margin-right: 6px;
+				border-radius: 100px;
+				background-color: #000000;
+			}
+		}
+	}
+
+	#smileyBox {
+		float: left;
+		width: 500px;
+
+		.smiley-wrap {
+			float: left;
+			width: 70px;
+			padding: 2px;
+			margin-right: 20px;
+
+			.smiley-text {
+				width: 50px;
+				display: inline-block;
+				font-family: Consolas, monospace;
+			}
+		}
+	}
+
+	.input-wrapper {
+		width: 85%;
+		float: left;
+		position: relative;
+
+		#txtMessage {
+			width: calc(~"100% - 26px");
+			padding: 5px;
+			float: left;
+			border: 1px solid @light-grey;
+			border-top: none;
+		}
+
+		.smiley-icon {
+			width: 26px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			background-image: url(/images/smiley.svg);
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	}
+}
+
+ol.tabs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+
+	li {
+		border: 1px solid @light-grey;
+		border-bottom: none;
+		float: left;
+		outline: none;
+
+
+		&.ui-state-hover {
+			background-color: #ebebeb;
+		}
+
+		&.ui-tabs-active {
+			background-color: @light-grey;
+		}
+
+		a {
+			display: inline-block;
+			box-sizing: content-box;
+			padding: 5px;
+			height: 20px;
+			line-height: 20px;
+			vertical-align: top;
+			text-decoration: none;
+			outline: none;
+		}
+
+		.tab-close-icon {
+			display: inline-block;
+			box-sizing: content-box;
+			height: 20px;
+			width: 16px;
+			padding: 5px;
+			overflow: hidden;
+			vertical-align: top;
+			background-size: 16px;
+			background-image: url(/images/cross.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			color: transparent;
+			cursor: pointer;
+		}
+	}
+}
+
+.clearfix {
+	clear: both;
+	height: 0;
+	overflow: hidden;
+}
+
+img {
+	cursor: pointer;
+}
+
+img.fullscreen {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	z-index: 10;
+}
+
+/*#region emoticons*/
+.emoticon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.emoticon_text {
+	display: none;
+}
+
+.emoticons_off .emoticon {
+	display: none;
+}
+
+.emoticons_off .emoticon_text {
+	display: inline;
+}
+
+.emoticon_smile {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7986px;
+}
+
+.emoticon_frown {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7765px;
+}
+
+.emoticon_poop {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7935px;
+}
+
+.emoticon_putnam {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7952px;
+}
+
+.emoticon_tongue {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8037px;
+}
+
+.emoticon_grin {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7816px;
+}
+
+.emoticon_gasp {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7782px;
+}
+
+.emoticon_wink {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8088px;
+}
+
+.emoticon_glasses {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7799px;
+}
+
+.emoticon_sunglasses {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8020px;
+}
+
+.emoticon_grumpy {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7833px;
+}
+
+.emoticon_unsure {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8054px;
+}
+
+.emoticon_cry {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7731px;
+}
+
+.emoticon_devil {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7748px;
+}
+
+.emoticon_angel {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7663px;
+}
+
+.emoticon_kiss {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7884px;
+}
+
+.emoticon_heart {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7850px;
+}
+
+.emoticon_brokenheart {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -3838px;
+}
+
+.emoticon_kiki {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7867px;
+}
+
+.emoticon_squint {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8003px;
+}
+
+.emoticon_confused {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7697px;
+}
+
+.emoticon_confused_rev {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7714px;
+}
+
+.emoticon_upset {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8071px;
+}
+
+.emoticon_pacman {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7901px;
+}
+
+.emoticon_robot {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8207px;
+}
+
+.emoticon_colonthree {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7680px;
+}
+
+.emoticon_penguin {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7918px;
+}
+
+.emoticon_shark {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7969px;
+}
+
+.emoticon_like {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -13px;
+}
+
+.emoticon_dislike {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2954px;
+}
+
+.emoticon_laughing {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5215px;
+}
+
+.emoticon_laughingcry {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5232px;
+}
+
+.emoticon_anxious {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5623px;
+}
+
+.emoticon_angry {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5555px;
+}
+
+.emoticon_clap {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2971px;
+}
+
+.emoticon_splat {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -4110px;
+}
+
+.emoticon_wank {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -7187px;
+}
+
+.emoticon_camel {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2444px;
+}
+
+.emoticon_hand {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5963px;
+}
+
+.emoticon_willy {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2767px;
+}
+
+.emoticon_star {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -472px;
+}
+
+.emoticon_flex {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -4178px;
+}
+
+.emoticon_crygrin {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5232px;
+}
+
+.emoticon_moist {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -4127px;
+}
+
+.emoticon_okhand {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2920px;
+}
+
+.emoticon_boof {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2886px;
+}
+
+.emoticon_flange {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -999px;
+}
+
+.emoticon_finger {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2818px;
+}
+
+.emoticon_cow {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -2495px;
+}
+
+.emoticon_usquint {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -8104px;
+}
+
+.emoticon_winkp {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5504px;
+}
+
+.emoticon_teehee {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5317px;
+}
+
+.emoticon_omg {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5776px;
+}
+
+
+.emoticon_blowheart {
+	background-image: url(/images/sprites.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: 0 -5453px;
+}
+
+/*#endregion*/

@@ -1,0 +1,32 @@
+doctype html
+html
+	head
+		title=Sockets
+		link(rel='stylesheet', href='/stylesheets/site.css')
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300')
+		script(src='https://code.jquery.com/jquery-2.1.1.js')
+		script(src='https://code.jquery.com/ui/1.11.2/jquery-ui.js')
+		script(src='https://cdn.socket.io/socket.io-1.3.5.js')
+		script(src='/javascripts/site.js')
+		block head
+	body
+		div.title-bar(style="display:none;")
+			div.title-inner
+				h1
+					span.title Sockets
+					span.version 2.8.0
+				div#btnMenu
+					span.bar
+					span.bar
+					span.bar
+				div#menu
+					div#btnLogout(onclick="Account.Logout()", title="Logout")
+					div#btnMute(onclick="Account.ToggleMute()", title="Toggle sound")
+					div#btnMuteNotifications(onclick="Account.ToggleNotifications()", title="Toggle notifications")
+						div.inner
+					input#chkDisableScroll(type="checkbox", name="disableScroll", title="Disable Scroll")
+		div.wrap
+			block content
+			div.clearfix
+		div.fs-window
+			div.inner

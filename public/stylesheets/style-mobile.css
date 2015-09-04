@@ -1,0 +1,37 @@
+﻿/*
+.title-bar {
+	.title-inner {
+		
+	}
+}
+
+.wrap {
+	padding: 5px;
+
+	h1 {
+		font-size: 18px;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 2px;
+	}
+}
+
+.messenger {
+	width: 100%;
+
+	.message-list {
+		width: 100%;
+	}
+
+	#txtMessage {
+		width: 100%;
+	}
+
+	#userList {
+		height: auto;
+		width: 100%;
+		border-top: none;
+		border-left: 1px solid @light-grey;
+	}
+}
+*/

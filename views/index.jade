@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	div.auth-wrap
+		label(for="colour") Colour
+		input#txtColour(type="text", name="colour", onkeypress="Colours.SelectionBoxKeyPress(event);")
+		label(for="status") Status
+		input#txtStatus(type="text", name="status")
+		label(for="username") Username
+		input#txtUsername(type="text", name="username", onkeyup="Account.LoginKeyUp(event)")
+		button#btnLogin(onclick="Account.Login();") Login
+	div.messenger
+		ul#userList
+		div#messageWindows
+			div.message-header
+				div.image
+				div.name Broadcast
+				div.status-bar ...
+			ul.message-list.active#messages_Broadcast
+		div#smileyBox
+		div.input-wrapper
+			input#txtMessage(type="text", name="message", onkeyup="Messaging.KeyUp(event);", onkeypress="Messaging.KeyPress(event);")
+			div.smiley-icon(onclick="Emoticons.ToggleHelp();")
+		div.clearfix
