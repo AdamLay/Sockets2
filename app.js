@@ -5,9 +5,10 @@ var fs = require("fs");
 var crypto = require('crypto');
 var routes = require("./routes/index");
 //#region Server Config
+var port = "80";
 var app = express();
 // all environments
-app.set("port", "3000"); // process.env.PORT || 3000);
+app.set("port", port); // process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(express.favicon());
